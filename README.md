@@ -6,4 +6,4 @@ Helper.cs contains all global fileds and properties
 
 Algorithms.cs has different algorithms and currentl have one for BMI
 
-My middle name(s) is sujith in case if you see hwo published this project / code. 
+My middle name(s) is sujith in case if you see who published this project / code. 

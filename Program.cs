@@ -15,7 +15,7 @@ namespace AlgorithmsTest
             Helper help = new Helper();
             try // want to catch the exception in case the input was in a different format or any other error
             {
-                help.AlgorithmName = (SplitAlgorithmArguments[0]);
+                help.AlgorithmName = (SplitAlgorithmArguments[0]).ToUpper(); // incase user enters small letters
                 help.AlgorithmValue1 = Convert.ToDouble((SplitAlgorithmArguments[1]));
                 help.AlgorithmValue2 = Convert.ToDouble((SplitAlgorithmArguments[2]));
             }
@@ -74,7 +74,19 @@ namespace AlgorithmsTest
                 throw;
             }
 
-            // approach 3 can explore Switch / Case 
+            // approach 3 
+
+
+            switch (help.AlgorithmName)
+            {
+                case "BMI":
+                    Console.WriteLine(algorithms.BMIAlgorithm(help.AlgorithmValue1, help.AlgorithmValue2));
+                    break;
+                case "Algorithm2":
+                    Console.WriteLine("Algorithm2 Results");
+                    break;
+            }
+
 
         }
     }
