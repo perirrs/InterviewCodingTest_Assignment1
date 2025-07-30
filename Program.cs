@@ -2,7 +2,7 @@
 using System.Runtime.Intrinsics.X86;
 using System.Security.Cryptography;
 
-namespace AlgorithmsTest
+namespace Algorithms
 {
     internal class Program
     {
@@ -25,68 +25,31 @@ namespace AlgorithmsTest
                 System.Environment.Exit(0);
             }
 
-
-            // Googled , if i can Dynamically input algorithm name with some appended string to form the method name , check for the method if exists and execute 
-            // helpful if there are hundreds of methods to check for instead of using if / switch conditions in the algorithms
-
-            Algorithms algorithms = new Algorithms();
-
-            // approach 1 : googled this approach
-
-
             try
             {
-                var getmethod = algorithms.GetType();
-                bool DoesTheMethodExists = getmethod.GetMethod(help.AlgorithmName + "Algorithm") != null;
-                if (DoesTheMethodExists == true)
+                switch (help.AlgorithmName)
                 {
-                    MethodInfo method = typeof(Algorithms).GetMethod(help.AlgorithmName + "Algorithm");
-                    object result = method?.Invoke(algorithms, new object[] { help.AlgorithmValue1, help.AlgorithmValue2 });
-                    Console.WriteLine(result);
+                    case "BMI":
+                        var bmiAlgorithm = new BMIAlgorithm();
+                        var input = new BMIInput { HeightinMts = help.AlgorithmValue1, WeightinKgs = help.AlgorithmValue2 };
+                        var result = bmiAlgorithm.RunAlgorithm(input);
+                        Console.WriteLine($"BMI: {result.BMI}, Category: {result.Result}");
+                        break;
+
+                    case "Algorithm2":
+                        Console.WriteLine("Algorithm2 Results");
+                        break;
+
+                    case "Algorithm3":
+                        Console.WriteLine("Algorithm3 Results");
+                        break;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                throw;
+                Console.WriteLine(e.Message + "Please try again or contact support team");
+                System.Environment.Exit(0);
             }
-
-
-
-            // appraoch 2
-            // 
-            try
-            {
-
-                if (help.AlgorithmName == "BMI")
-                {
-                    Console.WriteLine(algorithms.BMIAlgorithm(help.AlgorithmValue1, help.AlgorithmValue2));
-                }
-                else
-                {
-                    Console.WriteLine("Try again");
-                }
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-            // approach 3 
-
-
-            switch (help.AlgorithmName)
-            {
-                case "BMI":
-                    Console.WriteLine(algorithms.BMIAlgorithm(help.AlgorithmValue1, help.AlgorithmValue2));
-                    break;
-                case "Algorithm2":
-                    Console.WriteLine("Algorithm2 Results");
-                    break;
-            }
-
 
         }
     }
